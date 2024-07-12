@@ -1,7 +1,6 @@
 import { supprimer,ajouter,modifier,afficher_articles,supprimer_IdObject } from './database.js'
 import express from 'express'
 import cors from 'cors'
-import { ObjectId } from 'mongodb'
 
 const app = express()
 app.use(cors())
@@ -43,6 +42,6 @@ app.post('/update',async(req,res)=>{
 
 
 app.listen(8888,function(){
-    console.log('oui oui');
+    console.log(`Server à l'écoute`);
 })
 

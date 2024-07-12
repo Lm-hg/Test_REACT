@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from "mongodb";
 
-
+//connexion à la base de données
 async function connexion(){
 
     const uri='mongodb://localhost:27017';
@@ -15,6 +15,7 @@ async function connexion(){
     const collection = database.collection(collectionName);
     return collection;
 }
+//on supprime un article dont l'id est un int
 async function supprimer(id){
     const database = await connexion();
     let identifiant;
@@ -23,26 +24,20 @@ async function supprimer(id){
     
     database.deleteOne({_id:identifiant});
 }
+//on supprime un article dont l'id est un objectId
 async function supprimer_IdObject(id){
     const database= await connexion();
     let identifiant = new ObjectId(id);
     database.deleteOne({_id:identifiant});
 
 }
+//on affiche les articles
 async function afficher_articles(){
-    const uri='mongodb://localhost:27017';
-    const  client = new MongoClient(uri);
-
-    await client.connect();
-
-    const dbname='marche';
-    const collectionName = 'articles';
-
-    const database = client.db(dbname);
-    const collection =  database.collection(collectionName);
-    const article = collection.find({}).toArray();
+    const database= await connexion();
+    const article = database.find({}).toArray();
     return article;
 }
+//on ajoute un nouvel article
 async function ajouter(data){
     const database = await connexion();
     const article = {
@@ -55,8 +50,8 @@ async function ajouter(data){
 
     };
     database.insertOne(article);
- }
-
+}
+//on modifie les données d'un article
 async function modifier(data){
     const database = await connexion();
 
