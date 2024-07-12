@@ -23,18 +23,17 @@ function App() {
     .then((data) => setData(data))
     .catch((error) => console.error('Error fetching data:', error));
 }, []);
+
 //on affiche le formulaire d'ajout d'articles
+const [etat, setEtat]= useState({display:"none"});
   const affiche= ()=>{
-    var div=document.querySelector('.page')
-      div.style.display='block';
+      setEtat({display:"block"});
   }
 //Les liens qui ne conduisent nulle part
-  const navLink=["Accueil","Femme","Homme","Enfant & bébé","A propos"];
-  //on ferme le formulaire
+const navLink=["Accueil","Femme","Homme","Enfant & bébé","A propos"];
+//on ferme le formulaire
   const close=()=>{
-    var div=document.querySelector('.page')
-
-    div.style.display='none'
+    setEtat({display:"none"});
   }
   //on soumet le formulaire
   const Submitformulaire = async (e) => {
@@ -93,7 +92,7 @@ function App() {
     {data.map((a)=>(
       <Articles id={a._id} nom={a.name} type={a.type} dispo={a.available}  garanti={a.warranty_years} prix={a.price} ></Articles>
     ))}
-    <Form close={close} envoyer={Submitformulaire} nomRef={nomRef} prixRef={tarifRef} garantiRef={garantiRef} typeRef={typeRef} dispoRef={dispoRef}></Form>
+    <Form etat={etat} close={close} envoyer={Submitformulaire} nomRef={nomRef} prixRef={tarifRef} garantiRef={garantiRef} typeRef={typeRef} dispoRef={dispoRef}></Form>
     </main>
     </>
   )

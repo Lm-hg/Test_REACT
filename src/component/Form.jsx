@@ -1,7 +1,7 @@
 export default function Form(props){
 
     return(
-        <div className="page">
+        <div className="page" style={props.etat}>
 
             <div className="parent">
                 <form action="" onSubmit={props.envoyer}>

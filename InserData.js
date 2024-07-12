@@ -1,4 +1,4 @@
-import { connexion } from "./database";
+import { connexion } from "./database.js";
 async function insert(){
     const database = await  connexion();
     const article =[
